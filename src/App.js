@@ -1,20 +1,17 @@
+import { useState } from "react";
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 
 const App = () => {
-  const expenses = [{
-    title: 'Car Insurance', 
-    amount: 294.67, 
-    date: new Date(2021, 2, 28)
-  }, {
-    title: 'Car Insurance 2', 
-    amount: 294.67, 
-    date: new Date(2021, 2, 25)
-  }]
+  const [expenses, setExpenses] = useState([]);
+
+  const addExpenseHandler = expense => {
+    setExpenses(previousArray => ([...previousArray, expense]))
+  }
   
   return (
     <div>
-      <NewExpense />
+      <NewExpense onAddExpense={addExpenseHandler} />
       <Expenses expenses={expenses}/>
     </div>
   );
